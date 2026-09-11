@@ -1,5 +1,7 @@
 # Billable Time Tracker
 
+**v1.0.0**
+
 A local-only Chrome extension (Manifest V3) that tracks billable time passively,
 per browser tab/domain — no start/stop timer required. Tag time to a client,
 see dollar totals, and export a CSV or a printable invoice.
@@ -62,5 +64,5 @@ from the Dashboard header ("Take the tour").
   never counts toward a client's $ total or an invoice.
 - Deleting a client un-assigns its time entries rather than deleting them —
   they fall back to Unassigned.
-- Out of scope for this prototype: Chrome Web Store packaging, sync across
+- Out of scope for this version: Chrome Web Store packaging, sync across
   devices, team features, and native invoicing integrations.
