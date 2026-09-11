@@ -1,0 +1,18 @@
+/* theme.css — single source of truth for color tokens.
+   Imported by popup.css, options.css, and onboarding.css so the three
+   surfaces never drift out of sync. Dark, unconditionally. */
+
+:root {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --panel: #1b1e24;
+  --panel-2: #23272f;
+  --ink: #e6e8eb;
+  --muted: #8b93a1;
+  --border: #2c313a;
+  --accent: #4f8cff;
+  --accent-hover: #3f74e0;
+  --accent-soft: #16233d;
+  --green: #34d399;
+  --red: #f87171;
+}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Welcome — Billable Time Tracker</title>
+  <link rel="stylesheet" href="onboarding.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="dots">
+      <span class="dot active" data-dot="1"></span>
+      <span class="dot" data-dot="2"></span>
+      <span class="dot" data-dot="3"></span>
+    </div>
+
+    <!-- Step 1: Welcome + live proof it's already tracking -->
+    <section class="step active" data-step="1">
+      <div class="badge-icon">$</div>
+      <h1>You don't have to start anything.</h1>
+      <p class="lead">
+        Billable Time Tracker is already running in the background. No timer
+        to remember, no button to click. This onboarding tab itself isn't a
+        real website, so tracking is paused while you're on it — proof of
+        that below, live.
+      </p>
+
+      <div class="live-card">
+        <span class="live-dot" id="liveDot"></span>
+        <div class="live-text">
+          <span id="liveStatus" class="live-status">Checking…</span>
+          <span id="liveSub" class="live-sub"></span>
+        </div>
+      </div>
+
+      <p class="hint">
+        Try it: switch to another tab for a few seconds, then come back to
+        this one. Watch the card above react — and look at the toolbar icon
+        while you're away, too; that little green badge is the same live
+        timer, visible without opening anything.
+      </p>
+
+      <button class="btn btn-primary next-btn">Got it, what's next? →</button>
+    </section>
+
+    <!-- Step 2: Add first client -->
+    <section class="step" data-step="2">
+      <h1>Add your first client</h1>
+      <p class="lead">
+        Time only turns into dollars once it's tagged to a client and a rate.
+        Add one now — you can always add more, or change this later, from the
+        Dashboard.
+      </p>
+
+      <form id="onboardClientForm" class="onboard-form">
+        <div class="field">
+          <label for="obClientName">Client name</label>
+          <input type="text" id="obClientName" placeholder="e.g. Acme Corp" required />
+        </div>
+        <div class="field">
+          <label for="obClientRate">Hourly rate</label>
+          <input type="number" id="obClientRate" placeholder="150" min="0" step="0.01" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add client</button>
+      </form>
+      <p id="obClientConfirm" class="confirm-note" hidden>✓ Added — nice.</p>
+
+      <div class="step-actions">
+        <button class="btn back-btn">← Back</button>
+        <button class="btn btn-primary next-btn">Continue →</button>
+        <button class="btn-link skip-btn">Skip for now</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Recap -->
+    <section class="step" data-step="3">
+      <h1>You're set.</h1>
+      <ul class="recap-list">
+        <li><strong>Toolbar icon</strong> — a live badge shows what's tracking right now.</li>
+        <li><strong>Popup</strong> — click the icon anytime for today's time and $ at a glance.</li>
+        <li><strong>Dashboard</strong> — history, edits, manual entries, exports, and invoices all live there.</li>
+      </ul>
+      <p class="lead">Just keep browsing — that's the whole workflow.</p>
+
+      <div class="step-actions">
+        <button class="btn back-btn">← Back</button>
+        <button id="openDashboardBtn" class="btn btn-primary">Open Dashboard</button>
+        <button id="doneBtn" class="btn-link">Done, close this tab</button>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="onboarding.js"></script>
+</body>
+</html>

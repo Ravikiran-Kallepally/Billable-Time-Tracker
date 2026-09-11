@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Billable Time Tracker — Dashboard</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="app-header-row">
+        <h1>Billable Time Tracker</h1>
+        <button id="tourLinkBtn" class="tour-link">New here? Take the tour →</button>
+      </div>
+      <p class="subtitle">Dashboard</p>
+    </header>
+
+    <!-- Date range -->
+    <section class="card">
+      <h2>Date range</h2>
+      <div class="range-row">
+        <div class="segmented" id="rangeSegmented">
+          <button data-range="today" class="seg-btn active">Today</button>
+          <button data-range="week" class="seg-btn">This Week</button>
+          <button data-range="month" class="seg-btn">This Month</button>
+          <button data-range="custom" class="seg-btn">Custom</button>
+        </div>
+        <div id="customRange" class="custom-range" hidden>
+          <input type="date" id="customStart" />
+          <span>to</span>
+          <input type="date" id="customEnd" />
+          <button id="applyCustomRange" class="btn btn-small">Apply</button>
+        </div>
+        <span id="rangeLabel" class="range-label"></span>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="card">
+      <h2>Summary</h2>
+      <div class="summary-totals">
+        <div class="stat">
+          <span class="stat-label">Total tracked time</span>
+          <span id="summaryTotalTime" class="stat-value">0m</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total billable</span>
+          <span id="summaryTotalAmount" class="stat-value stat-amount">$0.00</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Unassigned time</span>
+          <span id="summaryUnassigned" class="stat-value stat-muted">0m</span>
+        </div>
+      </div>
+      <table class="table" id="clientSummaryTable">
+        <thead>
+          <tr><th>Client</th><th>Rate</th><th>Time</th><th>Amount</th></tr>
+        </thead>
+        <tbody id="clientSummaryBody"></tbody>
+      </table>
+      <p id="summaryEmpty" class="empty-note" hidden>No time tracked in this range yet.</p>
+    </section>
+
+    <!-- Entry table -->
+    <section class="card">
+      <h2>Entries</h2>
+      <div class="table-scroll">
+        <table class="table" id="entryTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Domain / Description</th>
+              <th>Client</th>
+              <th>Duration (min)</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="entryTableBody"></tbody>
+        </table>
+      </div>
+      <p id="entryEmpty" class="empty-note" hidden>No entries in this range.</p>
+    </section>
+
+    <!-- Manual entry -->
+    <section class="card">
+      <h2>Add manual entry</h2>
+      <form id="manualEntryForm" class="manual-form">
+        <div class="field">
+          <label for="manualDate">Date</label>
+          <input type="date" id="manualDate" required />
+        </div>
+        <div class="field field-grow">
+          <label for="manualDescription">Description</label>
+          <input type="text" id="manualDescription" placeholder="e.g. Client call" required />
+        </div>
+        <div class="field">
+          <label for="manualClient">Client</label>
+          <select id="manualClient">
+            <option value="">Unassigned</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="manualDuration">Duration (min)</label>
+          <input type="number" id="manualDuration" min="1" step="1" placeholder="30" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add entry</button>
+      </form>
+    </section>
+
+    <!-- Clients -->
+    <section class="card">
+      <h2>Clients</h2>
+      <table class="table" id="clientTable">
+        <thead>
+          <tr><th>Name</th><th>Hourly rate</th><th></th></tr>
+        </thead>
+        <tbody id="clientTableBody"></tbody>
+      </table>
+      <form id="addClientForm" class="add-client-form">
+        <input type="text" id="newClientName" placeholder="Client name" required />
+        <input type="number" id="newClientRate" placeholder="Hourly rate" min="0" step="0.01" required />
+        <button type="submit" class="btn btn-primary">Add client</button>
+      </form>
+    </section>
+
+    <!-- Export -->
+    <section class="card">
+      <h2>Export</h2>
+      <div class="export-row">
+        <button id="exportCsvBtn" class="btn">Export CSV (selected range)</button>
+      </div>
+      <div class="export-row invoice-row">
+        <label for="invoiceClient">Generate invoice for</label>
+        <select id="invoiceClient"></select>
+        <span class="range-label">using the selected date range above</span>
+        <button id="generateInvoiceBtn" class="btn btn-primary">Generate invoice</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Printable invoice overlay -->
+  <div id="invoiceOverlay" class="invoice-overlay" hidden>
+    <div class="invoice-toolbar no-print">
+      <button id="closeInvoiceBtn" class="btn">Close</button>
+      <button id="printInvoiceBtn" class="btn btn-primary">Print / Save as PDF</button>
+    </div>
+    <div id="invoiceContent" class="invoice-content"></div>
+  </div>
+
+  <!-- Undo snackbar -->
+  <div id="snackbar" class="snackbar" hidden>
+    <span id="snackbarMessage"></span>
+    <button id="snackbarUndoBtn" class="snackbar-undo">Undo</button>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

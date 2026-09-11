@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Billable Time Tracker</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Billable Time Tracker</h1>
+    <button id="dashboardBtn" class="link-btn" title="Open dashboard">Dashboard ↗</button>
+  </header>
+
+  <section class="totals">
+    <div class="totals-card">
+      <span class="totals-label">Today, tracked</span>
+      <span id="totalTime" class="totals-value">0m</span>
+    </div>
+    <div class="totals-card">
+      <span class="totals-label">Today, billable</span>
+      <span id="totalAmount" class="totals-value totals-amount">$0.00</span>
+    </div>
+  </section>
+
+  <section class="domains">
+    <div id="emptyState" class="empty-state" hidden>
+      No activity tracked yet today. Browse normally — tracking is automatic.
+    </div>
+    <table id="domainTable" class="domain-table" hidden>
+      <thead>
+        <tr>
+          <th>Domain</th>
+          <th>Time</th>
+          <th>Client</th>
+        </tr>
+      </thead>
+      <tbody id="domainTableBody"></tbody>
+    </table>
+  </section>
+
+  <footer class="footer">
+    <button id="refreshBtn" class="text-btn">Refresh</button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
