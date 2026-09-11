@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Billable Time Tracker",
-  "version": "0.1.0",
-  "description": "Passively tracks browser time per domain, tags it to clients, and generates invoices. Local-only prototype.",
+  "version": "1.0.0",
+  "description": "Passively tracks browser time per domain, tags it to clients, and generates invoices. Local-only.",
   "permissions": ["tabs", "idle", "storage", "alarms", "downloads"],
   "background": {
     "service_worker": "background.js",
