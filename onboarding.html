@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Welcome — Billable Time Tracker</title>
+  <title>Welcome · Billable Time Tracker</title>
   <link rel="stylesheet" href="onboarding.css" />
 </head>
 <body>
@@ -20,8 +20,8 @@
       <p class="lead">
         Billable Time Tracker is already running in the background. No timer
         to remember, no button to click. This onboarding tab itself isn't a
-        real website, so tracking is paused while you're on it — proof of
-        that below, live.
+        real website, so tracking is paused while you're on it. Proof is
+        below, live.
       </p>
 
       <div class="live-card">
@@ -34,12 +34,12 @@
 
       <p class="hint">
         Try it: switch to another tab for a few seconds, then come back to
-        this one. Watch the card above react — and look at the toolbar icon
-        while you're away, too; that little green badge is the same live
-        timer, visible without opening anything.
+        this one. Watch the card above react. Look at the toolbar icon while
+        you're away too: that little green badge is the same live timer,
+        visible without opening anything.
       </p>
 
-      <button class="btn btn-primary next-btn">Got it, what's next? →</button>
+      <button class="btn btn-primary next-btn ripple-host">Got it, what's next? →</button>
     </section>
 
     <!-- Step 2: Add first client -->
@@ -47,7 +47,7 @@
       <h1>Add your first client</h1>
       <p class="lead">
         Time only turns into dollars once it's tagged to a client and a rate.
-        Add one now — you can always add more, or change this later, from the
+        Add one now. You can always add more, or change this later, from the
         Dashboard.
       </p>
 
@@ -60,14 +60,14 @@
           <label for="obClientRate">Hourly rate</label>
           <input type="number" id="obClientRate" placeholder="150" min="0" step="0.01" required />
         </div>
-        <button type="submit" class="btn btn-primary">Add client</button>
+        <button type="submit" class="btn btn-primary ripple-host">Add client</button>
       </form>
-      <p id="obClientConfirm" class="confirm-note" hidden>✓ Added — nice.</p>
+      <p id="obClientConfirm" class="confirm-note" hidden>✓ Client added.</p>
 
       <div class="step-actions">
-        <button class="btn back-btn">← Back</button>
-        <button class="btn btn-primary next-btn">Continue →</button>
-        <button class="btn-link skip-btn">Skip for now</button>
+        <button class="btn back-btn ripple-host">← Back</button>
+        <button class="btn btn-primary next-btn ripple-host">Continue →</button>
+        <button class="btn-link skip-btn ripple-host">Skip for now</button>
       </div>
     </section>
 
@@ -75,16 +75,16 @@
     <section class="step" data-step="3">
       <h1>You're set.</h1>
       <ul class="recap-list">
-        <li><strong>Toolbar icon</strong> — a live badge shows what's tracking right now.</li>
-        <li><strong>Popup</strong> — click the icon anytime for today's time and $ at a glance.</li>
-        <li><strong>Dashboard</strong> — history, edits, manual entries, exports, and invoices all live there.</li>
+        <li><strong>Toolbar icon:</strong> a live badge shows what's tracking right now.</li>
+        <li><strong>Popup:</strong> click the icon anytime for today's time and $ at a glance.</li>
+        <li><strong>Dashboard:</strong> history, edits, manual entries, exports, and invoices all live there.</li>
       </ul>
-      <p class="lead">Just keep browsing — that's the whole workflow.</p>
+      <p class="lead">Just keep browsing. That's the whole workflow.</p>
 
       <div class="step-actions">
-        <button class="btn back-btn">← Back</button>
-        <button id="openDashboardBtn" class="btn btn-primary">Open Dashboard</button>
-        <button id="doneBtn" class="btn-link">Done, close this tab</button>
+        <button class="btn back-btn ripple-host">← Back</button>
+        <button id="openDashboardBtn" class="btn btn-primary ripple-host">Open Dashboard</button>
+        <button id="doneBtn" class="btn-link ripple-host">Done, close this tab</button>
       </div>
     </section>
   </div>

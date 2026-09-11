@@ -2,6 +2,9 @@
 
 import { dateKey, formatDuration, formatCurrency } from './lib/util.js';
 import { getClients, getDomainClientMap, getEntriesInRange, assignDomainToClient, aggregateByClient } from './lib/storage.js';
+import { attachRipple } from './lib/ripple.js';
+
+attachRipple();
 
 const totalTimeEl = document.getElementById('totalTime');
 const totalAmountEl = document.getElementById('totalAmount');

@@ -6,22 +6,25 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Roboto", -apple-system, "Segoe UI", Arial, sans-serif;
   font-size: 14px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .app {
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 24px 20px 60px;
+  padding: 32px 24px 64px;
 }
 
 .app-header h1 {
-  margin: 0 0 2px;
-  font-size: 22px;
+  margin: 0;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 .app-header .subtitle {
-  margin: 0 0 20px;
+  margin: 3px 0 24px;
   color: var(--muted);
   font-size: 13px;
 }
@@ -29,18 +32,22 @@ body {
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 20px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-1);
+  padding: 20px 22px;
   margin-bottom: 18px;
 }
 
 .card h2 {
-  margin: 0 0 14px;
-  font-size: 15px;
-  font-weight: 600;
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
 }
 
-/* Range selector */
+/* Range selector: Material segmented-button group */
 .range-row {
   display: flex;
   align-items: center;
@@ -50,23 +57,30 @@ body {
 
 .segmented {
   display: inline-flex;
+  gap: 2px;
+  background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
+  border-radius: var(--radius-md);
+  padding: 3px;
 }
 
 .seg-btn {
-  background: var(--panel);
+  background: none;
   border: none;
-  border-right: 1px solid var(--border);
+  border-radius: calc(var(--radius-md) - 3px);
   padding: 7px 14px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
-  color: var(--ink);
+  color: var(--muted);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
-.seg-btn:last-child { border-right: none; }
-.seg-btn.active { background: var(--accent); color: white; }
-.seg-btn:not(.active):hover { background: var(--accent-soft); }
+.seg-btn.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--elevation-1);
+}
+.seg-btn:not(.active):hover { background: rgba(255, 255, 255, 0.06); color: var(--ink); }
 
 .custom-range {
   display: flex;
@@ -75,14 +89,9 @@ body {
   font-size: 13px;
   color: var(--muted);
 }
-.custom-range input[type="date"] {
-  padding: 5px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
 
 .range-label {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--muted);
 }
 
@@ -90,20 +99,26 @@ body {
 .summary-totals {
   display: flex;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 .stat {
   flex: 1;
-  background: var(--accent-soft);
-  border-radius: 8px;
-  padding: 12px 14px;
+  background: var(--primary-container);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
-.stat-label { font-size: 12px; color: var(--muted); }
-.stat-value { font-size: 20px; font-weight: 700; }
-.stat-amount { color: var(--green); }
+.stat-label {
+  font-size: 11.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.stat-value { font-size: 21px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat-amount { color: var(--money); }
 .stat-muted { color: var(--muted); }
 
 /* Tables */
@@ -113,52 +128,99 @@ body {
 }
 .table th {
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   border-bottom: 1px solid var(--border);
-  padding: 6px 8px;
+  padding: 8px 10px;
+  background: var(--panel);
+  position: sticky;
+  top: 0;
 }
 .table td {
-  padding: 7px 8px;
+  padding: 9px 10px;
   border-bottom: 1px solid var(--border);
   font-size: 13px;
   vertical-align: middle;
 }
 .table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover td { background: rgba(255, 255, 255, 0.025); }
+
+.amount-money { color: var(--money); font-variant-numeric: tabular-nums; }
 
 .table-scroll {
   max-height: 420px;
   overflow-y: auto;
   overflow-x: auto;
+  border-radius: var(--radius-sm);
 }
 
 .empty-note {
   color: var(--muted);
   font-size: 13px;
-  padding: 10px 2px 2px;
+  padding: 12px 2px 2px;
 }
 
-.select-input, .duration-input, .rate-input, .name-input {
+/* Material outlined text fields, used everywhere */
+.select-input,
+.duration-input,
+.rate-input,
+.name-input,
+.field input,
+.field select,
+.add-client-form input,
+.custom-range input[type="date"],
+.invoice-row select {
   font-size: 13px;
-  padding: 4px 6px;
+  padding: 7px 9px;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--panel);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
   color: var(--ink);
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.duration-input { width: 70px; }
-.rate-input { width: 90px; }
+.select-input:hover,
+.duration-input:hover,
+.rate-input:hover,
+.name-input:hover,
+.field input:hover,
+.field select:hover,
+.add-client-form input:hover,
+.custom-range input[type="date"]:hover,
+.invoice-row select:hover {
+  border-color: var(--outline-strong);
+}
+.select-input:focus,
+.duration-input:focus,
+.rate-input:focus,
+.name-input:focus,
+.field input:focus,
+.field select:focus,
+.add-client-form input:focus,
+.custom-range input[type="date"]:focus,
+.invoice-row select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-container);
+}
+.duration-input { width: 76px; }
+.rate-input { width: 94px; }
 
 .icon-btn {
   background: none;
   border: none;
-  color: var(--red);
+  color: var(--error);
   cursor: pointer;
-  font-size: 13px;
-  padding: 2px 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 5px 9px;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
 }
-.icon-btn:hover { text-decoration: underline; }
+.icon-btn:hover { background: var(--error-container); }
 
 /* Manual entry form */
 .manual-form {
@@ -170,66 +232,67 @@ body {
 .field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 12px;
+  gap: 5px;
+  font-size: 11.5px;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 .field-grow { flex: 1; min-width: 180px; }
-.field input, .field select {
-  font-size: 13px;
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
 
 .add-client-form {
   display: flex;
   gap: 10px;
-  margin-top: 12px;
-}
-.add-client-form input {
-  font-size: 13px;
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  margin-top: 14px;
 }
 #newClientName { flex: 1; }
-#newClientRate { width: 130px; }
+#newClientRate { width: 140px; }
 
-/* Buttons */
+/* Buttons: Material filled / tonal-outlined / text variants */
 .btn {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  padding: 8px 14px;
+  background: none;
+  border: 1px solid var(--outline-strong);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
   font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
   color: var(--ink);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
-.btn:hover { background: var(--accent-soft); }
+.btn:hover { background: rgba(255, 255, 255, 0.06); }
+
 .btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--elevation-1);
 }
-.btn-primary:hover { background: var(--accent-hover); }
-.btn-small { padding: 5px 10px; font-size: 12px; }
+.btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); box-shadow: var(--elevation-2); }
+
+.btn-secondary {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--on-secondary);
+  box-shadow: var(--elevation-1);
+}
+.btn-secondary:hover { background: var(--secondary-hover); border-color: var(--secondary-hover); box-shadow: var(--elevation-2); }
+
+.btn-small { padding: 6px 12px; font-size: 12px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
 
 /* Export */
 .export-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
-.invoice-row select {
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 13px;
-}
+.export-row:last-child { margin-bottom: 0; }
 
-/* Printable invoice overlay — always a light "paper" page, regardless of theme. */
+/* Printable invoice overlay: always a light "paper" page, regardless of theme. */
 .invoice-overlay {
   color-scheme: light;
   position: fixed;
@@ -243,11 +306,13 @@ body {
   justify-content: flex-end;
   gap: 10px;
   padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
   background: white;
 }
+.invoice-toolbar .btn:not(.btn-primary) { color: #1a1a1a; border-color: #d1d5db; }
+.invoice-toolbar .btn:not(.btn-primary):hover { background: #f3f4f6; }
 .invoice-content {
   max-width: 720px;
   margin: 0 auto;
@@ -304,12 +369,15 @@ body {
 .tour-link {
   background: none;
   border: none;
-  color: var(--accent);
-  font-size: 12px;
+  color: var(--primary-light);
+  font-size: 12.5px;
+  font-weight: 500;
   cursor: pointer;
-  padding: 0;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
 }
-.tour-link:hover { text-decoration: underline; }
+.tour-link:hover { background: var(--primary-container); }
 
 .app-header-row {
   display: flex;
@@ -318,7 +386,9 @@ body {
   gap: 12px;
 }
 
-/* Undo snackbar */
+/* Undo snackbar: Material spec uses an inverse-surface color, which on a
+   dark app means a light surface, so it reads as a distinct system message
+   rather than blending into the dark UI. */
 .snackbar {
   position: fixed;
   left: 50%;
@@ -326,15 +396,14 @@ body {
   transform: translate(-50%, 16px);
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  color: var(--ink);
-  padding: 12px 16px;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  gap: 20px;
+  background: var(--surface-inverse);
+  color: var(--on-surface-inverse);
+  padding: 13px 16px 13px 18px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
   z-index: 1100;
-  font-size: 13px;
+  font-size: 13.5px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
@@ -347,11 +416,15 @@ body {
 .snackbar-undo {
   background: none;
   border: none;
-  color: var(--accent);
-  font-weight: 600;
+  color: var(--primary-pressed);
+  font-weight: 700;
   font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
   white-space: nowrap;
+  transition: background-color 0.15s ease;
 }
-.snackbar-undo:hover { text-decoration: underline; }
+.snackbar-undo:hover { background: rgba(0, 0, 0, 0.06); }

@@ -1,18 +1,94 @@
-/* theme.css — single source of truth for color tokens.
-   Imported by popup.css, options.css, and onboarding.css so the three
-   surfaces never drift out of sync. Dark, unconditionally. */
+/* theme.css — single source of truth for design tokens (color, elevation,
+   radius) and the shared ripple animation. Imported by popup.css, options.css,
+   and onboarding.css so all three surfaces stay in sync.
+
+   Material Design-inspired dark theme, forced (not conditional on OS theme).
+   Roles follow Material's system: a primary brand color for standard actions,
+   a secondary accent used sparingly and only where it has a real job, a
+   dedicated semantic color for money, and a neutral surface scale with
+   elevation overlays instead of flat single-tone panels. */
 
 :root {
   color-scheme: dark;
-  --bg: #0f1115;
-  --panel: #1b1e24;
-  --panel-2: #23272f;
-  --ink: #e6e8eb;
-  --muted: #8b93a1;
-  --border: #2c313a;
-  --accent: #4f8cff;
-  --accent-hover: #3f74e0;
-  --accent-soft: #16233d;
-  --green: #34d399;
-  --red: #f87171;
+
+  /* --- Brand: primary (indigo) ------------------------------------ */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-pressed: #4338ca;
+  --primary-light: #a5b4fc;
+  --primary-container: rgba(99, 102, 241, 0.16);
+  --on-primary: #ffffff;
+
+  /* --- Brand: secondary (amber) — reserved for money-moment actions --- */
+  --secondary: #f5a623;
+  --secondary-hover: #dc9316;
+  --secondary-container: rgba(245, 166, 35, 0.14);
+  --on-secondary: #1a1300;
+
+  /* --- Semantic --- */
+  --money: #34d399;
+  --error: #f87171;
+  --error-hover: #ef4444;
+  --error-container: rgba(248, 113, 113, 0.14);
+
+  /* --- Surfaces: Material dark baseline with elevation overlays --- */
+  --surface-0: #121212;
+  --surface-1: #1c1c1e;
+  --surface-2: #222225;
+  --surface-3: #29292d;
+  --surface-inverse: #f2f2f5;
+  --on-surface-inverse: #1b1b1f;
+
+  --on-surface: rgba(255, 255, 255, 0.92);
+  --on-surface-muted: rgba(255, 255, 255, 0.62);
+  --on-surface-faint: rgba(255, 255, 255, 0.40);
+  --outline: rgba(255, 255, 255, 0.12);
+  --outline-strong: rgba(255, 255, 255, 0.24);
+
+  /* --- Elevation (dark theme: subtle shadow + lighter surface tint) --- */
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --elevation-2: 0 3px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --elevation-3: 0 10px 28px rgba(0, 0, 0, 0.55), 0 3px 8px rgba(0, 0, 0, 0.4);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* --- Back-compat aliases (kept so existing component CSS stays terse) --- */
+  --bg: var(--surface-0);
+  --panel: var(--surface-1);
+  --panel-2: var(--surface-2);
+  --ink: var(--on-surface);
+  --muted: var(--on-surface-muted);
+  --border: var(--outline);
+  --accent: var(--primary);
+  --accent-hover: var(--primary-hover);
+  --accent-soft: var(--primary-container);
+  --green: var(--money);
+  --red: var(--error);
+}
+
+/* --- Shared Material ripple ------------------------------------------- */
+/* Any element with class "ripple-host" gets position:relative + clipped
+   overflow so a .ripple span (added by lib/ripple.js on pointerdown) can
+   expand and fade from the click point, tinted to match the element's own
+   text color. */
+.ripple-host {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: currentColor;
+  opacity: 0.22;
+  pointer-events: none;
+  animation: ripple-expand 480ms ease-out;
+}
+@keyframes ripple-expand {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
 }

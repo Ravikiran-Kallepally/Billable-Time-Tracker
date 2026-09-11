@@ -8,9 +8,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% -10%, var(--accent-soft), var(--bg) 60%);
+  background: radial-gradient(circle at 50% -10%, var(--primary-container), var(--bg) 60%);
   color: var(--ink);
-  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Roboto", -apple-system, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .wrap {
@@ -32,8 +33,8 @@ body {
   background: var(--border);
   transition: background 0.2s ease, transform 0.2s ease;
 }
-.dot.active { background: var(--accent); transform: scale(1.25); }
-.dot.done { background: var(--green); }
+.dot.active { background: var(--primary); transform: scale(1.25); }
+.dot.done { background: var(--money); }
 
 .step {
   display: none;
@@ -50,22 +51,27 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* The onboarding "$" mark uses the secondary (amber) brand color deliberately:
+   it's the one spot that IS the money moment, matching the extension icon. */
 .badge-icon {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4f8cff, #2f5fd1);
+  background: linear-gradient(135deg, #ffc65c, var(--secondary));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 700;
-  color: white;
+  color: var(--on-secondary);
+  box-shadow: var(--elevation-2);
   margin-bottom: 4px;
 }
 
 h1 {
   font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.3;
 }
@@ -94,7 +100,8 @@ h1 {
   gap: 12px;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
   padding: 14px 16px;
   margin: 4px 0;
 }
@@ -106,7 +113,7 @@ h1 {
   flex-shrink: 0;
 }
 .live-dot.on {
-  background: var(--green);
+  background: var(--money);
   box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
   animation: pulse 1.6s ease-in-out infinite;
 }
@@ -136,25 +143,36 @@ h1 {
 .field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 12px;
+  gap: 5px;
+  font-size: 11.5px;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   text-align: left;
 }
 .field input {
   font-size: 13px;
   padding: 8px 10px;
   border: 1px solid var(--border);
-  border-radius: 7px;
-  background: var(--panel);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
   color: var(--ink);
   min-width: 160px;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field input:hover { border-color: var(--outline-strong); }
+.field input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-container);
 }
 #obClientRate { min-width: 100px; }
 
 .confirm-note {
-  color: var(--green);
+  color: var(--money);
   font-size: 13px;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -178,21 +196,25 @@ h1 {
 }
 
 .btn {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: none;
+  border: 1px solid var(--outline-strong);
+  border-radius: var(--radius-sm);
   padding: 10px 18px;
   font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
   color: var(--ink);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
-.btn:hover { background: var(--accent-soft); }
+.btn:hover { background: rgba(255, 255, 255, 0.06); }
 .btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--elevation-1);
 }
-.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); box-shadow: var(--elevation-2); }
 
 .btn-link {
   background: none;
@@ -200,6 +222,8 @@ h1 {
   color: var(--muted);
   font-size: 13px;
   cursor: pointer;
-  text-decoration: underline;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
-.btn-link:hover { color: var(--ink); }
+.btn-link:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }

@@ -8,7 +8,7 @@
 <body>
   <header class="header">
     <h1>Billable Time Tracker</h1>
-    <button id="dashboardBtn" class="link-btn" title="Open dashboard">Dashboard ↗</button>
+    <button id="dashboardBtn" class="link-btn ripple-host" title="Open dashboard">Dashboard ↗</button>
   </header>
 
   <section class="totals">
@@ -24,7 +24,7 @@
 
   <section class="domains">
     <div id="emptyState" class="empty-state" hidden>
-      No activity tracked yet today. Browse normally — tracking is automatic.
+      No activity tracked yet today. Tracking starts automatically as you browse.
     </div>
     <table id="domainTable" class="domain-table" hidden>
       <thead>
@@ -39,7 +39,7 @@
   </section>
 
   <footer class="footer">
-    <button id="refreshBtn" class="text-btn">Refresh</button>
+    <button id="refreshBtn" class="text-btn ripple-host">Refresh</button>
   </footer>
 
   <script type="module" src="popup.js"></script>

@@ -2,6 +2,9 @@
 // add a first client, recap where everything lives.
 
 import { addClient } from './lib/storage.js';
+import { attachRipple } from './lib/ripple.js';
+
+attachRipple();
 
 const TOTAL_STEPS = 3;
 let currentStep = 1;
@@ -92,7 +95,7 @@ function render(status) {
   liveDotEl.classList.remove('on');
   liveStatusEl.textContent = 'Paused right now';
   if (status.lastDomain) {
-    liveSubEl.textContent = `Was on ${status.lastDomain} ${formatAgo(status.lastAgoMs)} — switch tabs and back to see this update.`;
+    liveSubEl.textContent = `Was on ${status.lastDomain} ${formatAgo(status.lastAgoMs)}. Switch tabs and back to see this update.`;
   } else {
     liveSubEl.textContent = 'Switch to another tab for a few seconds, then come back.';
   }

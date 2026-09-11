@@ -124,13 +124,13 @@ async function updateBadge() {
   await loadSession();
   if (!session) {
     chrome.action.setBadgeText({ text: '' });
-    chrome.action.setTitle({ title: 'Billable Time Tracker — paused' });
+    chrome.action.setTitle({ title: 'Billable Time Tracker: paused' });
     return;
   }
   const elapsedMs = Date.now() - session.startedAt;
   chrome.action.setBadgeText({ text: formatBadge(elapsedMs) });
   chrome.action.setBadgeBackgroundColor({ color: '#059669' });
-  chrome.action.setTitle({ title: `Billable Time Tracker — tracking ${session.domain} (${formatBadge(elapsedMs)})` });
+  chrome.action.setTitle({ title: `Billable Time Tracker: tracking ${session.domain} (${formatBadge(elapsedMs)})` });
 }
 
 // Best-effort smoothing: while the service worker happens to stay alive

@@ -18,6 +18,9 @@ import {
   deleteManualEntry,
   restoreManualEntry,
 } from './lib/storage.js';
+import { attachRipple } from './lib/ripple.js';
+
+attachRipple();
 
 const state = {
   range: 'today',
@@ -167,7 +170,7 @@ function renderSummary() {
       <td>${escapeHtml(c.name)}</td>
       <td>${formatCurrency(c.rate)}/hr</td>
       <td>${formatDuration(c.durationMs)}</td>
-      <td>${formatCurrency(c.amount)}</td>
+      <td class="amount-money">${formatCurrency(c.amount)}</td>
     `;
     clientSummaryBody.appendChild(tr);
   }
@@ -216,11 +219,17 @@ function renderEntryTable() {
 
     const amountTd = document.createElement('td');
     const client = clientsCache.find((c) => c.id === entry.client);
-    amountTd.textContent = client ? formatCurrency(msToAmount(entry.durationMs, client.hourlyRate)) : '—';
+    if (client) {
+      amountTd.textContent = formatCurrency(msToAmount(entry.durationMs, client.hourlyRate));
+      amountTd.className = 'amount-money';
+    } else {
+      amountTd.textContent = '-';
+      amountTd.style.color = 'var(--muted)';
+    }
 
     const actionsTd = document.createElement('td');
     const delBtn = document.createElement('button');
-    delBtn.className = 'icon-btn';
+    delBtn.className = 'icon-btn ripple-host';
     delBtn.textContent = 'Delete';
     delBtn.addEventListener('click', () => deleteEntry(entry));
     actionsTd.appendChild(delBtn);
@@ -299,7 +308,7 @@ function renderClientTable() {
 
     const actionsTd = document.createElement('td');
     const delBtn = document.createElement('button');
-    delBtn.className = 'icon-btn';
+    delBtn.className = 'icon-btn ripple-host';
     delBtn.textContent = 'Delete';
     delBtn.addEventListener('click', () => deleteClientRow(client));
     actionsTd.appendChild(delBtn);
